@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from math import pow
+
 """
 -------------
 | x | o | x |
@@ -67,6 +69,7 @@ def check_for_win(b):
 	
 	# Catch All for tie
 	return "-"
+	
 def get_open_spaces(board):
 	spaces = []
 	for i in range(0, len(board)):
@@ -75,7 +78,6 @@ def get_open_spaces(board):
 				spaces.append([i,j])
 	return spaces
 		
-	
 def find_best_move(b, player):
 	spaces = get_open_spaces(b)
 	move = []
@@ -102,7 +104,6 @@ def imminent_win(b, player):
 		b[space[0]][space[1]] = " "
 	return move
 			
-	
 def get_move_score(row, col, b, curr_player, eval_player, move_count):
 	orig = b[row][col]
 	b[row][col] = curr_player
@@ -111,11 +112,11 @@ def get_move_score(row, col, b, curr_player, eval_player, move_count):
 	score = 0
 	if (was_win):
 		if (was_win == eval_player):
-			score = 1 / move_count
+			score = 1 / pow(move_count, move_count)
 		elif(was_win == "-"):
 			score = 0
 		else:
-			score = -1 / move_count
+			score = -1 / pow(move_count, move_count)
 	else:
 		spaces = get_open_spaces(board)
 		for space in spaces:

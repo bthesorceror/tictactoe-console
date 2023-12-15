@@ -32,7 +32,7 @@ def setup_players():
 				if (h_player == "x"): computer_players = ["o"]
 				if (h_player == "o"): computer_players = ["x"]
 		except ValueError as e:
-			print "Invalid Answer!"
+			print ('Invalid Answer!')
 			continue
 		except Exception as e:
 			print e

@@ -22,20 +22,21 @@ def setup_players():
 	valid_setup = False
 	while (not valid_setup):
 		try:
-			nop = int(raw_input("Number of human players: "))
+			nop = int(input("Number of human players: "))
 			if (nop > 2 or nop < 0): raise Exception("Invalid number of players!")
 			if (nop == 0):
 				computer_players = ["x", "o"]
 			elif (nop == 1):
-				h_player = raw_input("Enter player type (x or o): ")
+				h_player = input("Enter player type (x or o): ")
 				if (h_player != "x" and h_player != "o"): raise Exception("Invalid player type!")
 				if (h_player == "x"): computer_players = ["o"]
 				if (h_player == "o"): computer_players = ["x"]
 		except ValueError as e:
-			print "Invalid Answer!"
+			print("Invalid Answer!")
+			
 			continue
 		except Exception as e:
-			print e
+			print(e)
 			continue
 		valid_setup = True
 		
@@ -134,31 +135,31 @@ def request_move(b):
 	valid_move = False
 	while not valid_move:
 		try:
-			row = int(raw_input("Enter row: ")) - 1
+			row = int(input("Enter row: ")) - 1
 			if (row < 0 or row > 2): raise Exception("Invalid row given!")
-			col = int(raw_input("Enter col: ")) - 1
+			col = int(input("Enter col: ")) - 1
 			if (col < 0 or col > 2): raise Exception("Invalid col given!")
 		except ValueError as e:
-			print "Must be a numeric value"
+			print("Must be a numeric value")
 			continue
 		except Exception as e:
-			print e
+			print(e)
 			continue
 		if (b[row][col] == " "):
 			valid_move = True
 		else:
-			print "Invalid move!"
+			print("Invalid move!")
 	return (row, col)
 	
 def print_board(b):
-	print " ", " ", "1", " ", "2", " ", "3"
-	print " ", "-" * 13
-	print "1 |", b[0][0], "|", b[0][1], "|", b[0][2], "|"
-	print " ", "-" * 13
-	print "2 |", b[1][0], "|", b[1][1], "|", b[1][2], "|"
-	print " ", "-" * 13
-	print "3 |", b[2][0], "|", b[2][1], "|", b[2][2], "|"
-	print " ","-" * 13
+	print(" ", " ", "1", " ", "2", " ", "3")
+	print(" ", "-" * 13)
+	print("1 |", b[0][0], "|", b[0][1], "|", b[0][2], "|")
+	print(" ", "-" * 13)
+	print("2 |", b[1][0], "|", b[1][1], "|", b[1][2], "|")
+	print(" ", "-" * 13)
+	print("3 |", b[2][0], "|", b[2][1], "|", b[2][2], "|")
+	print(" ","-" * 13)
 	
 def switch_player(p):
 	if (p == "x"): return "o"
@@ -168,7 +169,7 @@ setup_players()
 while not winner:
 	print_board(board)
 	if (player in computer_players):
-		print "Computer is THINKING!"
+		print("Computer is THINKING!")
 		p_move = find_best_move(board, player)
 	else:
 		p_move = request_move(board)
@@ -179,6 +180,7 @@ while not winner:
 
 print_board(board)
 if (winner == "-"):
-	print "Players tied!"
+	print("Players tied!")
 else:
-	print "Player %s wins!" % winner
+	# print("Player %s wins!") % winner
+	print("Player %s wins!" % winner)
